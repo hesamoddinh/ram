@@ -1,0 +1,149 @@
+Last Modified Time  
+######How setup RamzArzMelli step by step######
+
+#Install OS:
+*Ubuntu 18.04.01
+sudo apt-get update
+sudo apt-get upgrade
+
+---------------
+#Make correspond directory and change current directory:
+mkdir RAMProject 
+----------------
+#Install Git:
+sudo apt-get install git
+sudo git clone https://github.com/hesamoddinh/ram.git
+
+----------------
+#Install Curl:
+sudo apt-get install curl
+----------------
+#Install Docker:
+##Prerequisite:
+Install and connect a vpnclient app:
+sudo apt-get install openconnect
+sudo openconnet [serverName]
+
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt update
+sudo apt install docker-ce
+
+docker --version
+sudo service docker status
+
+		// sudo snap install docker// 
+
+		//Do this if previous step failed
+		sudo apt-get install docker
+
+
+
+
+**If you want to avoid typing `sudo` whenever you run the `docker` command, add your username to the `docker` group:
+sudo usermod -aG docker ${USER}
+su - ${USER}
+----------------
+#Install DockerCompose
+sudo apt-get install docker-compose 
+sudo docker-compose --version
+----------------
+#Update Respository and Upgare OS:
+sudo apt-get update
+sudo apt-get upgrade
+----------------
+#Install Go Language
+//sudo apt-get install golang-go
+wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
+sudo tar -xvf go1.10.1.linux-amd64.tar.gz
+sudo mv go /usr/local
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+sudo go get github.com/nu7hatch/gouuid
+**check $GOPATH/src/github.com/nu7hatch directory which should contains uuid.go and uuid_test.go files
+----------------
+#Install Node.js and NPM
+//curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install nodejs
+----------------
+#Install Python version 2.7
+sudo apt-get install python
+python --version
+----------------
+#Install Fabric Samples
+##Download Fabric Samples
+**Choose the location to clone fabric-samples repository, then execute following commands. Suppose `$HOME/hyperledger` as parent directory:
+cd $HOME/hyperledger
+git clone -b master https://github.com/hyperledger/fabric-samples.git
+cd fabric-samples
+----------------
+#Install Binaries:
+cd $HOME/hyperledger/
+// sudo -i //
+sudo curl -sSL https://goo.gl/6wtTN5 | bash -s 1.1.0
+**Then add the `bin` path to `PATH` variable, in order to execute the command **without** having to navigate to `bin` directory:
+export PATH=$PATH:$HOME/hyperledger/bin
+----------------
+#Install npm and pm2
+sudo apt-get install npm
+sudo install -g pm2
+*#sudo pm2 logs [0-1-2]
+*#sudo pm2 stop [all][0-1-2]
+*#sudo pm2 start [all][0-1-2]
+*#sudo pm2 restart 0
+
+######How to run RamzArzMelli step by step######
+#0.Map Docker Domains to localhost
+sudo nano /etc/hosts
+*Edit the file `/etc/hosts` and add these lines at the end of file:
+127.0.0.1       orderer.example.com
+127.0.0.1       example.com
+127.0.0.1       peer0.a.example.com
+127.0.0.1       peer0.b.example.com
+127.0.0.1       peer0.c.example.com
+127.0.0.1       ca.a.example.com
+----------------
+#1.Generate
+location -->" rootproject "
+./network.sh -m generate
+----------------
+#2.Up
+./network.sh -m up
+----------------
+#3.Run WebApi for 3 Orgs With PM2
+cd webapp
+nmp install 
+sudo npm install -g pm2
+sudo ORG=a PORT=9001 pm2 start npm --name "a-org" -- start
+sudo ORG=b PORT=9002 pm2 start npm --name "b-org" -- start
+sudo ORG=c PORT=9003 pm2 start npm --name "c-org" -- start
+
+----------------
+#4.Build React Web Client
+cd ../react-webapp
+sudo npm install
+npm start
+//npm run build
+**#pm2 log 0 
+
+-----------------------------------------------------------------------------
+#Troubleshooting:
+
+##Failed to install application where administration directory is locked by other procces:
+
+sudo rm /var/lib/apt/lists/lock
+sudo rm /var/cache/apt/archives/lock
+sudo rm var/lib/dpkg/lock
+
+ 
+
+
+
+
+
+
+
+
+

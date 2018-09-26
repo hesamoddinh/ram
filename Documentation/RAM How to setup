@@ -33,14 +33,6 @@ sudo apt install docker-ce
 docker --version
 sudo service docker status
 
-		// sudo snap install docker// 
-
-		//Do this if previous step failed
-		sudo apt-get install docker
-
-
-
-
 **If you want to avoid typing `sudo` whenever you run the `docker` command, add your username to the `docker` group:
 sudo usermod -aG docker ${USER}
 su - ${USER}
@@ -54,10 +46,10 @@ sudo apt-get update
 sudo apt-get upgrade
 ----------------
 #Install Go Language
-//sudo apt-get install golang-go
-wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
-sudo tar -xvf go1.10.1.linux-amd64.tar.gz
-sudo mv go /usr/local
+sudo apt-get install golang-go
+//wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
+//sudo tar -xvf go1.10.1.linux-amd64.tar.gz
+//sudo mv go /usr/local
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
@@ -114,7 +106,7 @@ location -->" rootproject "
 ----------------
 #3.Run WebApi for 3 Orgs With PM2
 cd webapp
-nmp install 
+sudo nmp install 
 sudo npm install -g pm2
 sudo ORG=a PORT=9001 pm2 start npm --name "a-org" -- start
 sudo ORG=b PORT=9002 pm2 start npm --name "b-org" -- start

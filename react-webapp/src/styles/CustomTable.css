@@ -1,0 +1,127 @@
+
+.ui.table.custom-table {
+    direction: ltr;
+    color: black !important;
+    font-weight: bold;
+    text-align: center;
+
+}
+
+.ui.table.custom-table tr {
+    color: black !important;
+}
+
+.ui.table.custom-table td {
+    color: black !important;
+}
+
+.ui.table.custom-table thead th {
+    background: #273238;
+    color: white
+}
+
+.ui.table.celled.custom-table tr td {
+    border-left: 2px solid #ced3cd;
+}
+
+.ui.table.celled.custom-table tr th {
+    border-left: none;
+}
+
+.ui.celled.table.custom-table tr td:first-child {
+    border-left: none;
+}
+
+.ui.table.custom-table tr:first-child td {
+    border-top: none;
+}
+
+.ui.table.custom-table tr td {
+    border-top: 2px solid #ced3cd;
+}
+
+.ui.table.custom-table td.positive {
+    background: #2ECC71 !important;
+}
+
+.ui.table.custom-table td.negative {
+    background: #e7809d !important;
+}
+
+.ui.table.custom-table td.warning {
+    background: #f6d377 !important;
+}
+
+.ui.table.custom-table.rtl {
+    direction: rtl;
+}
+
+.ui.table.custom-table.rtl thead tr:first-child > th:last-child {
+    border-radius: .28571429rem 0 0 0;
+}
+
+.ui.table.custom-table.rtl thead tr:first-child > th:first-child {
+    border-radius: 0 .28571429rem 0 0;
+}
+
+.ui.table.custom-table.rtl tr td:first-child {
+    border-right: none;
+}
+
+.ui.table.custom-table.rtl tr td {
+    border-right: 2px solid rgb(206, 211, 205);
+    border-left: none;
+}
+
+@media only screen and (max-width: 767px) {
+    .ui.table.custom-table:not(.unstackable) td:first-child, .ui.table.custom-table:not(.unstackable) th:first-child {
+        font-weight: bold;
+
+    }
+
+    .ui.table.custom-table:not(.unstackable) tr > td, .ui.table.custom-table:not(.unstackable) tr > th {
+        padding: .92857143em .78571429em !important;
+
+    }
+
+    .ui.table.custom-table:not(.unstackable) tr > td {
+        border-left: 2px solid #ced3cd;
+    }
+
+    .ui.table.custom-table:not(.unstackable) tr > th {
+        border-left: none;
+    }
+
+    .ui.table.custom-table:not(.unstackable) tr > td:first-child {
+        border-left: none;
+    }
+
+    .ui.table.custom-table:not(.unstackable) tr:first-child td {
+        border-top: none;
+    }
+
+    .ui.table.custom-table:not(.unstackable) tr > td {
+        border-top: 2px solid #ced3cd;
+    }
+
+    .ui.table.custom-table:not(.unstackable) tr > td, .ui.table.custom-table:not(.unstackable) tr > th {
+        display: table-cell !important;
+    }
+
+    .ui.table:not(.unstackable) thead {
+        display: table-header-group;
+    }
+
+    .ui.table.custom-table:not(.unstackable) tr {
+        display: table-row !important;
+    }
+
+    .ui.table:not(.unstackable) tbody {
+        display: table-row-group !important;
+    }
+
+    .ui.table.custom-table {
+        overflow: scroll;
+        min-width: 200px;
+    }
+}

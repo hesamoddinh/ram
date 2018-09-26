@@ -1,0 +1,87 @@
+
+.pagination-btn {
+    background-color: #e4e4e4;
+    border: solid 1px #e4e4e4;
+    color: #a0a0a0;
+    height: 30px !important;
+    width: 30px !important;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 5px !important;
+    /*margin-right: 3px;*/
+    /*margin-left: 3px;*/
+    line-height: 2;
+    text-align: center;
+}
+
+.pagination-btn-active {
+    height: 30px !important;
+    width: 30px !important;
+    background: transparent !important;
+    border: 0 !important;
+    /*border: solid 1px red;*/
+    /*background-color: red;*/
+    color: black !important;
+}
+
+.mui-pagination > ul {
+    list-style: none;
+    direction: ltr;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: right;
+}
+
+.mui-pagination > ul > li {
+    display: inline-block;
+}
+
+.mui-pagination > ul > .pagination-btn > a {
+    color: #a0a0a0 !important;
+    border: 0;
+    outline: none;
+}
+
+.mui-pagination > ul > .pagination-btn-active > a {
+    color: black !important;
+    border: 0;
+    outline: none;
+}
+
+.mui-pagination > div > div > :first-child > div, .mui-pagination > div > div > :last-child > div {
+    background-color: #e4e4e4 !important;
+    border: solid 1px #e4e4e4;
+    color: #a0a0a0;
+}
+
+.mui-pagination > div > div > :first-child > div > svg, .mui-pagination > div > div > :last-child > div > svg {
+    fill: #a0a0a0;
+}
+
+.mui-pagination > div > div > button > div {
+    height: 30px !important;
+    width: 30px !important;
+    border: solid 1px red;
+    border-radius: 4px;
+    background-color: red;
+    color: white;
+}
+
+.mui-pagination > div > div > button > div > svg {
+    fill: #a0a0a0 !important;
+    margin-bottom: 3px !important;
+}
+
+.mui-pagination > div > div > button {
+    height: 30px !important;
+    width: 30px !important;
+    border-radius: 4px !important;
+}
+
+.mui-pagination > div > div > button > div > span {
+    padding: 0 !important;
+}
+
+.mui-pagination > div > div {
+    direction: ltr;
+}

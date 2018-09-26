@@ -1,0 +1,10 @@
+{
+  "index": {
+    "fields": [
+      "Created"
+    ]
+  },
+  "ddoc":"indexCreatedDoc",
+  "name": "Created-json-index",
+  "type": "json"
+}

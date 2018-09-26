@@ -1,0 +1,158 @@
+#
+# Copyright Altoros. All Rights Reserved.
+#
+
+version: '2'
+
+#networks:
+#  byfn:
+
+volumes:
+  peer0.b.example.com:
+  peer1.b.example.com:
+
+services:
+
+#  couchdb-b-0:
+#    container_name: couchdb-b-0
+#    image: hyperledger/fabric-couchdb
+#    # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
+#    # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
+#    environment:
+#      - COUCHDB_USER=
+#      - COUCHDB_PASSWORD=
+#    # Comment/Uncomment the port mapping if you want to hide/expose the CouchDB service,
+#    # for example map it to utilize Fauxton User Interface in dev environments.
+#    ports:
+#      - "5984:5984"
+#    networks:
+#      - byfn
+#
+#  couchdb-b-1:
+#    container_name: couchdb-b-1
+#    image: hyperledger/fabric-couchdb
+#    # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
+#    # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
+#    environment:
+#      - COUCHDB_USER=
+#      - COUCHDB_PASSWORD=
+#    # Comment/Uncomment the port mapping if you want to hide/expose the CouchDB service,
+#    # for example map it to utilize Fauxton User Interface in dev environments.
+#    ports:
+#      - "6984:5984"
+#    networks:
+#      - byfn
+
+  ca.b.example.com:
+    container_name: ca.b.example.com
+    image: hyperledger/fabric-ca:x86_64-1.1.0
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.b.example.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/7a3e027fc163fc00242177ba9cf929edad97e0c70021db489b9db8fd9a26027e_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.b.example.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/7a3e027fc163fc00242177ba9cf929edad97e0c70021db489b9db8fd9a26027e_sk
+#    ports:
+#      - 8054:7054
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../artifacts/crypto-config/peerOrganizations/b.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ../artifacts/fabric-ca-server-config-b.yaml:/etc/hyperledger/fabric-ca-server/fabric-ca-server-config.yaml
+
+  peer0.b.example.com:
+    container_name: peer0.b.example.com
+    extends:
+      file: base-intercept.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.b.example.com
+      - CORE_PEER_LOCALMSPID=bMSP
+      - CORE_PEER_ADDRESS=peer0.b.example.com:7051
+#      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+#      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb0:5984
+#      # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+#      # provide the credentials for ledger to connect to CouchDB.  The username and password must
+#      # match the username and password set for the associated CouchDB.
+#      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+#      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    ports:
+      - 8051:7051
+      - 8053:7053
+    volumes:
+        - ../artifacts/crypto-config/peerOrganizations/b.example.com/peers/peer0.b.example.com/:/etc/hyperledger/crypto/peer
+        - peer0.b.example.com:/var/hyperledger/production
+    depends_on:
+      - ca.b.example.com
+#      - couchdb-b-0
+    
+
+  peer1.b.example.com:
+    container_name: peer1.b.example.com
+    extends:
+      file: base-intercept.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.b.example.com
+      - CORE_PEER_LOCALMSPID=bMSP
+      - CORE_PEER_ADDRESS=peer1.b.example.com:7051
+#      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+#      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb0:6984
+#      # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+#      # provide the credentials for ledger to connect to CouchDB.  The username and password must
+#      # match the username and password set for the associated CouchDB.
+#      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+#      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    ports:
+      - 8056:7051
+      - 8058:7053
+    volumes:
+        - ../artifacts/crypto-config/peerOrganizations/b.example.com/peers/peer1.b.example.com/:/etc/hyperledger/crypto/peer
+        - peer1.b.example.com:/var/hyperledger/production
+    depends_on:
+      - ca.b.example.com
+#      - couchdb-b-1
+    
+
+  # fabric-rest api server
+  api.b.example.com:
+    extends:
+      file: base-intercept.yaml
+      service: api-base
+    container_name: api.b.example.com
+    ports:
+      - 4001:4000
+    environment:
+      - ORG=b
+      - PORT=4000
+    depends_on:
+      - peer0.b.example.com
+      - peer1.b.example.com
+    
+
+  cli.example.com:
+    container_name: cli.example.com
+    extends:
+      file: base-intercept.yaml
+      service: cli-base
+    volumes:
+      - ../artifacts/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls:/etc/hyperledger/crypto/orderer/tls
+
+  cli.b.example.com:
+    container_name: cli.b.example.com
+    extends:
+      service: cli.example.com
+    environment:
+      - CORE_PEER_LOCALMSPID=bMSP
+    volumes:
+        - ../artifacts/crypto-config/peerOrganizations/b.example.com/users/Admin@b.example.com:/etc/hyperledger/crypto/peer
+    
+
+  # simple http server to disseminate certificates
+  www.b.example.com:
+    extends:
+      file: base-intercept.yaml
+      service: www-base
+    container_name: www.b.example.com
+    ports:
+      - 8082:80

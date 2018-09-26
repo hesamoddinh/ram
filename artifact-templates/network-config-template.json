@@ -1,0 +1,72 @@
+{
+  "network-config": {
+    "orderer": {
+      "url": "grpcs://orderer.example.com:7050",
+      "server-hostname": "orderer.example.com",
+      "tls_cacerts": "crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt"
+    },
+    "a": {
+      "name": "peera",
+      "mspid": "aMSP",
+      "ca": "https://ca.a.example.com:7054",
+      "peer0": {
+        "requests": "grpcs://peer0.a.example.com:7051",
+        "events": "grpcs://peer0.a.example.com:7053",
+        "server-hostname": "peer0.a.example.com",
+        "tls_cacerts": "crypto-config/peerOrganizations/a.example.com/peers/peer0.a.example.com/tls/ca.crt"
+      },
+      "peer1": {
+        "requests": "grpcs://peer1.a.example.com:7056",
+        "events": "grpcs://peer1.a.example.com:7058",
+        "server-hostname": "peer1.a.example.com",
+        "tls_cacerts": "crypto-config/peerOrganizations/a.example.com/peers/peer1.a.example.com/tls/ca.crt"
+      },
+      "admin": {
+        "key": "crypto-config/peerOrganizations/a.example.com/users/Admin@a.example.com/msp/keystore",
+        "cert": "crypto-config/peerOrganizations/a.example.com/users/Admin@a.example.com/msp/signcerts"
+      }
+    },
+    "b": {
+      "name": "peerb",
+      "mspid": "bMSP",
+      "ca": "https://ca.b.example.com:7054",
+      "peer0": {
+        "requests": "grpcs://peer0.b.example.com:8051",
+        "events": "grpcs://peer0.b.example.com:8053",
+        "server-hostname": "peer0.b.example.com",
+        "tls_cacerts": "crypto-config/peerOrganizations/b.example.com/peers/peer0.b.example.com/tls/ca.crt"
+      },
+      "peer1": {
+        "requests": "grpcs://peer1.b.example.com:8056",
+        "events": "grpcs://peer1.b.example.com:8058",
+        "server-hostname": "peer1.b.example.com",
+        "tls_cacerts": "crypto-config/peerOrganizations/b.example.com/peers/peer1.b.example.com/tls/ca.crt"
+      },
+      "admin": {
+        "key": "crypto-config/peerOrganizations/b.example.com/users/Admin@b.example.com/msp/keystore",
+        "cert": "crypto-config/peerOrganizations/b.example.com/users/Admin@b.example.com/msp/signcerts"
+      }
+    },
+    "c": {
+      "name": "peerc",
+      "mspid": "cMSP",
+      "ca": "https://ca.c.example.com:7054",
+      "peer0": {
+        "requests": "grpcs://peer0.c.example.com:9051",
+        "events": "grpcs://peer0.c.example.com:9053",
+        "server-hostname": "peer0.c.example.com",
+        "tls_cacerts": "crypto-config/peerOrganizations/c.example.com/peers/peer0.c.example.com/tls/ca.crt"
+      },
+      "peer1": {
+        "requests": "grpcs://peer1.c.example.com:9056",
+        "events": "grpcs://peer1.c.example.com:9058",
+        "server-hostname": "peer1.c.example.com",
+        "tls_cacerts": "crypto-config/peerOrganizations/c.example.com/peers/peer1.c.example.com/tls/ca.crt"
+      },
+      "admin": {
+        "key": "crypto-config/peerOrganizations/c.example.com/users/Admin@c.example.com/msp/keystore",
+        "cert": "crypto-config/peerOrganizations/c.example.com/users/Admin@c.example.com/msp/signcerts"
+      }
+    }
+  }
+}

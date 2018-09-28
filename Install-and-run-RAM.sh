@@ -34,7 +34,7 @@ sudo ./network.sh -m up
 
 #3.Run WebApi for 3 Orgs With PM2
 cd $HOME/RAMProject/ram/webapp
-sudo nmp install 
+sudo npm install 
 sudo npm install -g pm2
 sudo ORG=a PORT=9001 pm2 start npm --name "a-org" -- start
 sudo ORG=b PORT=9002 pm2 start npm --name "b-org" -- start

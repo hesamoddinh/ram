@@ -76,6 +76,7 @@ nvm alias default 'lts/*'
 # Install the latest version of npm
 echo "# Installing npm"
 npm install npm@latest -g
+sudo apt-get install -y npm
 
 
 # Ensure that CA certificates are installed

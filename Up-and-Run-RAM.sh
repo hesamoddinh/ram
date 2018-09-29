@@ -13,7 +13,8 @@ cd $HOME/hyperledger
 git clone -b master https://github.com/hyperledger/fabric-samples.git
 
 # Install Binaries:
-cd $HOME/hyperledger/
+sudo -i
+cd /home/[user]/hyperledger/
 sudo curl -sSL https://goo.gl/6wtTN5 | bash -s 1.1.0
 export PATH=$PATH:$HOME/hyperledger/bin
 

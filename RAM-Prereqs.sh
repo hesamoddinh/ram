@@ -33,8 +33,8 @@ fi
 
 # Update package lists
 echo "# Updating package lists"
-sudo apt-add-repository -y ppa:git-core/ppa
-sudo apt-get update
+sudo apt-get update -y
+sudo apt-get upgrade -y
 
 # Install Git
 echo "# Installing Git"
@@ -43,32 +43,13 @@ sudo apt-get install -y git
 #Install Curl
 sudo apt-get install -y curl
 
-# Install nvm dependencies
-echo "# Installing nvm dependencies"
-sudo apt-get -y install build-essential libssl-dev
-
-# Execute nvm installation script
-echo "# Executing nvm installation script"
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash -
-
-# Set up nvm environment without restarting the shell
-export NVM_DIR="${HOME}/.nvm"
-[ -s "${NVM_DIR}/nvm.sh" ] && . "${NVM_DIR}/nvm.sh"
-[ -s "${NVM_DIR}/bash_completion" ] && . "${NVM_DIR}/bash_completion"
-
 # Install node
-echo "# Installing nodeJS"
-nvm install --lts
-
-# Configure nvm to use version 6.9.5
-nvm use --lts
-nvm alias default 'lts/*'
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
 # Install the latest version of npm
 echo "# Installing npm"
-npm install npm@latest -g
 sudo apt-get install -y npm
-
 
 # Ensure that CA certificates are installed
 sudo apt-get -y install apt-transport-https ca-certificates software-properties-common
@@ -114,7 +95,7 @@ mkdir $HOME/RAMProject
 cd $HOME/RAMProject
 wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
 sudo tar -xvf go1.10.1.linux-amd64.tar.gz
-sudo mv go /usr/local
+sudo cp -r go /usr/local
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin

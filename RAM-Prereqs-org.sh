@@ -40,13 +40,16 @@ sudo apt-get update
 echo "# Installing Git"
 sudo apt-get install -y git
 
+#Install Curl
+sudo apt-get install -y curl
+
 # Install nvm dependencies
 echo "# Installing nvm dependencies"
 sudo apt-get -y install build-essential libssl-dev
 
 # Execute nvm installation script
 echo "# Executing nvm installation script"
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash -
 
 # Set up nvm environment without restarting the shell
 export NVM_DIR="${HOME}/.nvm"
@@ -127,11 +130,10 @@ echo -n 'npm:            '
 npm --version
 echo -n 'Docker:         '
 docker --version
-echo -n 'Docker Compose:ls
+echo -n 'Docker Compose:ls '
 docker-compose --version
 echo -n 'Python:         '
 python -V
-
 # Print reminder of need to logout in order for these changes to take effect!
 echo ''
 echo "Please logout then login before continuing."

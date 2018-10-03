@@ -36,10 +36,6 @@ echo "# Updating package lists"
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
-# Install Git
-echo "# Installing Git"
-sudo apt-get install -y git
-
 #Install Curl
 sudo apt-get install -y curl
 
@@ -63,9 +59,6 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 # Update package lists
 sudo apt-get update
 
-# Verifies APT is pulling from the correct Repository
-sudo apt-cache policy docker-ce
-
 # Install Docker
 echo "# Installing Docker"
 sudo apt-get -y install docker-ce
@@ -87,8 +80,6 @@ then
    sudo apt-get install -y python-minimal
 fi
 
-# Install unzip, required to install hyperledger fabric.
-sudo apt-get -y install unzip
 
 # Install Go Language
 mkdir $HOME/RAMProject

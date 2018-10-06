@@ -12,7 +12,7 @@
 set -e
 
 # Array of supported versions
-declare -a versions=('18.04.1');
+declare -a versions=('18.04.1','16.04');
 
 # check the version and extract codename of ubuntu if release codename not provided by user
 if [ -z "$1" ]; then
@@ -82,8 +82,8 @@ fi
 
 
 # Install Go Language
-mkdir $HOME/RAMProject
-cd $HOME/RAMProject
+mkdir $HOME/ram
+cd $HOME/ram
 wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
 sudo tar -xvf go1.10.1.linux-amd64.tar.gz
 sudo cp -r go /usr/local

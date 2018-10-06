@@ -39,13 +39,9 @@ sudo apt-get upgrade -y
 #Install Curl
 sudo apt-get install -y curl
 
-# Install node
+# Install node and npm
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install -y nodejs
-
-# Install the latest version of npm
-echo "# Installing npm"
-sudo apt-get install -y npm
 
 # Ensure that CA certificates are installed
 sudo apt-get -y install apt-transport-https ca-certificates software-properties-common

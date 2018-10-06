@@ -85,7 +85,7 @@ sudo tar -xvf go1.10.1.linux-amd64.tar.gz
 sudo cp -r go /usr/local
 sudo apt install -y golang-go
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
+export GOPATH=/usr/local/go
 export PATH=$PATH:$GOPATH/bin
 sudo go get github.com/nu7hatch/gouuid
 

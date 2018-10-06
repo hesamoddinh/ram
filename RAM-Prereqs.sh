@@ -83,6 +83,7 @@ cd $HOME/ram
 wget https://dl.google.com/go/go1.10.1.linux-amd64.tar.gz
 sudo tar -xvf go1.10.1.linux-amd64.tar.gz
 sudo cp -r go /usr/local
+sudo apt install -y golang-go
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
